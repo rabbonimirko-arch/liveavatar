@@ -16,7 +16,7 @@
       font-family: system-ui, Arial, sans-serif;
     }
 
-    /* Barra in alto con titolo */
+    /* HEADER fissa */
     header {
       width: 100%;
       padding: 14px 0;
@@ -34,10 +34,10 @@
       left: 0;
     }
 
-    /* Area full screen sotto l’header (pensata per telefoni 9:16) */
+    /* CONTENITORE FULL SCREEN */
     #fullscreen-wrapper {
       position: fixed;
-      top: 50px;               /* altezza indicativa dell’header */
+      top: 50px; /* spazio per l’header */
       left: 0;
       right: 0;
       bottom: 0;
@@ -45,43 +45,65 @@
       height: calc(100% - 50px);
       overflow: hidden;
       z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #000;
+    }
 
+    /* Adattamento schermo 9:16 */
+    .avatar-container {
+      width: 100%;
+      max-width: 480px;
+      height: 100%;
+      aspect-ratio: 9 / 16;
       display: flex;
       align-items: center;
       justify-content: center;
     }
 
-    /* Contenitore 9:16 per il telefono */
-    .avatar-container {
-      width: 100%;
-      max-width: 480px;        /* larghezza tipica smartphone */
-      height: 100%;
-      aspect-ratio: 9 / 16;
-    }
-
-    .avatar-container iframe {
+    iframe {
       width: 100%;
       height: 100%;
       border: none;
-      object-fit: cover;       /* riempie tutto lo spazio disponibile */
+      object-fit: cover;
       display: block;
+      background: #000;
+    }
+
+    /* Migliora stabilità del rendering su iOS Safari */
+    @supports (-webkit-touch-callout: none) {
+      iframe {
+        transform: translateZ(0);
+      }
     }
   </style>
 </head>
 
 <body>
-
   <header>DIGITAL SCREEN ITALIA · AI ASSISTANT</header>
 
   <div id="fullscreen-wrapper">
     <div class="avatar-container">
       <iframe
         src="https://embed.liveavatar.com/v1/84e5d840-f959-4b1c-a109-6f7045a46ff2"
-        allow="microphone"
+        allow="microphone; camera; autoplay; encrypted-media; fullscreen"
+        allowfullscreen
         title="LiveAvatar Embed">
       </iframe>
     </div>
   </div>
 
+  <script>
+    // Forza l’autoplay su alcuni browser mobili
+    document.addEventListener('touchstart', () => {
+      const ifr = document.querySelector('iframe');
+      if (ifr && ifr.contentWindow) {
+        try {
+          ifr.contentWindow.postMessage({ type: 'resume' }, '*');
+        } catch(e) { /* ignora errori cross-origin */ }
+      }
+    });
+  </script>
 </body>
 </html>
