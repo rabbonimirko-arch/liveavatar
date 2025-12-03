@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Digital Screen Italia · AI Assistant</title>
+
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      background: #000;
+      overflow: hidden;
+      font-family: system-ui, Arial, sans-serif;
+    }
+
+    /* Barra in alto con titolo */
+    header {
+      width: 100%;
+      padding: 14px 0;
+      text-align: center;
+      background: linear-gradient(90deg, #02131e, #033049, #02131e);
+      color: #e6faff;
+      font-size: 1rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      border-bottom: 1px solid rgba(0, 180, 255, 0.4);
+      z-index: 10;
+      position: fixed;
+      top: 0;
+      left: 0;
+    }
+
+    /* Area full screen sotto l’header (pensata per telefoni 9:16) */
+    #fullscreen-wrapper {
+      position: fixed;
+      top: 50px;               /* altezza indicativa dell’header */
+      left: 0;
+      right: 0;
+      bottom: 0;
+      width: 100%;
+      height: calc(100% - 50px);
+      overflow: hidden;
+      z-index: 1;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Contenitore 9:16 per il telefono */
+    .avatar-container {
+      width: 100%;
+      max-width: 480px;        /* larghezza tipica smartphone */
+      height: 100%;
+      aspect-ratio: 9 / 16;
+    }
+
+    .avatar-container iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      object-fit: cover;       /* riempie tutto lo spazio disponibile */
+      display: block;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>DIGITAL SCREEN ITALIA · AI ASSISTANT</header>
+
+  <div id="fullscreen-wrapper">
+    <div class="avatar-container">
+      <iframe
+        src="https://embed.liveavatar.com/v1/84e5d840-f959-4b1c-a109-6f7045a46ff2"
+        allow="microphone"
+        title="LiveAvatar Embed">
+      </iframe>
+    </div>
+  </div>
+
+</body>
+</html>
